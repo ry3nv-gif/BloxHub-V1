@@ -1,36 +1,34 @@
--- BloxHub | V1 GUI
+-- BloxHub V1
+
+--
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "BloxHubV1"
 screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
+-- 
 local mainFrame = Instance.new("Frame")
 mainFrame.Size = UDim2.new(0, 400, 0, 500)
 mainFrame.Position = UDim2.new(0.5, -200, 0.5, -250)
 mainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+mainFrame
+
+-- 
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "BloxHubV1"
+screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+-- 
+local mainFrame = Instance.new("Frame")
+mainFrame.Size = UDim2.new(0, 400, 0, 500)
+mainFrame.Position = UDim2.new(0.5, -200, 0.5, -250)
+mainFrame.BackgroundColor3 = Color3.fromRGB(255, 0, 0) -- Initial cherry red background
 mainFrame.BorderSizePixel = 2
 mainFrame.Parent = screenGui
 
+--
 local title = Instance.new("TextLabel")
 title.Text = "BloxHub | V1"
 title.Size = UDim2.new(1, 0, 0, 50)
 title.Position = UDim2.new(0, 0, 0, 0)
 title.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-title.TextColor3 = Color3.fromRGB(255, 255, 255)
-title.TextSize = 24
-title.Parent = mainFrame
-
--- Add a button for functionality
-local button = Instance.new("TextButton")
-button.Text = "Click Me"
-button.Size = UDim2.new(0, 200, 0, 50)
-button.Position = UDim2.new(0.5, -100, 0.5, 100)
-button.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
-button.TextColor3 = Color3.fromRGB(255, 255, 255)
-button.TextSize = 20
-button.Parent = mainFrame
-
--- Button click event (just a placeholder)
-button.MouseButton1Click:Connect(function()
-    print("Button Clicked!")
-    -- You can add your custom functionality here
-end)
+title.TextColor3 = Color3.fromRGB(255, 25
