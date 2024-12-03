@@ -1,16 +1,4 @@
--- BloxHub V1
-
---
-local screenGui = Instance.new("ScreenGui")
-screenGui.Name = "BloxHubV1"
-screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-
--- 
-local mainFrame = Instance.new("Frame")
-mainFrame.Size = UDim2.new(0, 400, 0, 500)
-mainFrame.Position = UDim2.new(0.5, -200, 0.5, -250)
-mainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-mainFrame
+-- BloxHub | V1
 
 -- 
 local screenGui = Instance.new("ScreenGui")
@@ -25,10 +13,73 @@ mainFrame.BackgroundColor3 = Color3.fromRGB(255, 0, 0) -- Initial cherry red bac
 mainFrame.BorderSizePixel = 2
 mainFrame.Parent = screenGui
 
---
+-- 
 local title = Instance.new("TextLabel")
 title.Text = "BloxHub | V1"
 title.Size = UDim2.new(1, 0, 0, 50)
 title.Position = UDim2.new(0, 0, 0, 0)
 title.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-title.TextColor3 = Color3.fromRGB(255, 25
+title.TextColor3 = Color3.fromRGB(255, 255, 255)
+title.TextSize = 24
+title.TextStrokeTransparency = 0.8
+title.Parent = mainFrame
+
+-- 
+local button = Instance.new("TextButton")
+button.Text = "Close Gui"
+button.Size = UDim2.new(0, 200, 0, 50)
+button.Position = UDim2.new(0.5, -100, 0.5, 100)
+button.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+button.TextColor3 = Color3.fromRGB(255, 255, 255)
+button.TextSize = 20
+button.Parent = mainFrame
+
+-- Button click event (just a placeholder)
+button.MouseButton1Click:Connect(function()
+    print("Button Clicked!")
+    -- You can add your custom functionality here
+end)
+
+-- 
+local TweenService = game:GetService("TweenService")
+
+--
+local tweenInfo = TweenInfo.new(3, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, -1, true)  -- Infinite loop with easing
+
+-- 
+local backgroundTween = TweenService:Create(mainFrame, tweenInfo, {BackgroundColor3 = Color3.fromRGB(255, 50, 50)})  -- Lighter cherry red
+
+-- 
+backgroundTween:Play()
+
+-- 
+local isDragging = false
+local dragStart
+local startPos
+
+-- 
+local function updatePosition(input)
+    local delta = input.Position - dragStart
+    mainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+end
+
+--
+title.MouseButton1Down:Connect(function(input)
+    isDragging = true
+    dragStart = input.Position
+    startPos = mainFrame.Position
+end)
+
+-- 
+game:GetService("UserInputService").InputChanged:Connect(function(input)
+    if isDragging then
+        updatePosition(input)
+    end
+end)
+
+-- 
+game:GetService("UserInputService").InputEnded:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        isDragging = false
+    end
+end)
