@@ -1,11 +1,11 @@
--- BloxHub | V1
+-- BloxHub | V1 Animated Cherry Red Background GUI Script for Roblox
 
--- 
+-- Create the ScreenGui
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "BloxHubV1"
 screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
--- 
+-- Create the main frame
 local mainFrame = Instance.new("Frame")
 mainFrame.Size = UDim2.new(0, 400, 0, 500)
 mainFrame.Position = UDim2.new(0.5, -200, 0.5, -250)
@@ -13,7 +13,7 @@ mainFrame.BackgroundColor3 = Color3.fromRGB(255, 0, 0) -- Initial cherry red bac
 mainFrame.BorderSizePixel = 2
 mainFrame.Parent = screenGui
 
--- 
+-- Add a title label to the GUI
 local title = Instance.new("TextLabel")
 title.Text = "BloxHub | V1"
 title.Size = UDim2.new(1, 0, 0, 50)
@@ -24,9 +24,9 @@ title.TextSize = 24
 title.TextStrokeTransparency = 0.8
 title.Parent = mainFrame
 
--- 
+-- Add a button for functionality
 local button = Instance.new("TextButton")
-button.Text = "Close Gui"
+button.Text = "Click Me"
 button.Size = UDim2.new(0, 200, 0, 50)
 button.Position = UDim2.new(0.5, -100, 0.5, 100)
 button.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
@@ -40,44 +40,44 @@ button.MouseButton1Click:Connect(function()
     -- You can add your custom functionality here
 end)
 
--- 
+-- Create a function for animating the background color
 local TweenService = game:GetService("TweenService")
 
---
+-- Animation properties for the background color
 local tweenInfo = TweenInfo.new(3, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, -1, true)  -- Infinite loop with easing
 
--- 
+-- Create a Tween for the background color transition (from cherry red to a lighter shade and back)
 local backgroundTween = TweenService:Create(mainFrame, tweenInfo, {BackgroundColor3 = Color3.fromRGB(255, 50, 50)})  -- Lighter cherry red
 
--- 
+-- Play the animation
 backgroundTween:Play()
 
--- 
+-- Make the GUI frame draggable
 local isDragging = false
 local dragStart
 local startPos
 
--- 
+-- Function to update the position while dragging
 local function updatePosition(input)
     local delta = input.Position - dragStart
     mainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
 end
 
---
+-- Detect when the player starts dragging
 title.MouseButton1Down:Connect(function(input)
     isDragging = true
     dragStart = input.Position
     startPos = mainFrame.Position
 end)
 
--- 
+-- Update the position when dragging
 game:GetService("UserInputService").InputChanged:Connect(function(input)
     if isDragging then
         updatePosition(input)
     end
 end)
 
--- 
+-- Stop dragging when the player releases the mouse
 game:GetService("UserInputService").InputEnded:Connect(function(input)
     if input.UserInputType == Enum.UserInputType.MouseButton1 then
         isDragging = false
